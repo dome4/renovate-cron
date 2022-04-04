@@ -19,6 +19,7 @@ services:
       # - SCHEDULE=*/30 * * * * * # debug - every 30 seconds
       - SCHEDULE=0 5 * * * # every day at 5 am
       - TIME_ZONE=Europe/Berlin 
+      - RENOVATE_GIT_URL=endpoint
     networks:
       - renovate
 
