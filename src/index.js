@@ -7,7 +7,9 @@ const TIME_ZONE = process.env.TIME_ZONE || "Europe/London";
 function executeRenovate(job) {
 
     // prevent cron job overlap
-    if(!job.running){
+    if(!job.taskRunning){
+        job.taskRunning = true;
+
         const renovate = spawn("docker-entrypoint.sh", {
             cwd: '/usr/src/app',
             stdio: "inherit",
@@ -17,14 +19,17 @@ function executeRenovate(job) {
             if (code !== 0) {
                 job.stop();
                 console.error('Failed in renovate. Return code', code);
+                job.taskRunning = false
                 process.exit(code);
             }
+            job.taskRunning = false
             console.log(`Renovate exited with code ${code}`);
         });
         renovate.on('error', (err) => {            
             job.stop();
             console.error('Failed in renovate. Return code');
             console.error(err);
+            job.taskRunning = false
             process.exit(1);
         });
     } else {
