@@ -1,4 +1,4 @@
-FROM renovate/renovate:32.238.1-slim
+FROM renovate/renovate:34.76.2-slim
 
 ENV SCHEDULE="0 0 * * *"
 ENV TIME_ZONE="Europe/London"
