@@ -5,7 +5,8 @@ services:
   #   docker image updates   #
   ############################ 
   renovate:
-    build: https://github.com/dome4/renovate-cron.git#main
+    # build: https://github.com/dome4/renovate-cron.git#main
+    build: .
     restart: always
     environment:
       - RENOVATE_GIT_AUTHOR=Renovate Bot <bot@${DOMAINNAME}>
